@@ -101,8 +101,8 @@ $txtToken.Font = New-Object System.Drawing.Font($fontFamily, 9)
 $txtToken.ReadOnly = $false
 $txtToken.Enabled = $true
 $txtToken.BackColor = [System.Drawing.Color]::White
-$txtToken.PasswordChar = [char]0x2022  # bullet character mask
-$txtToken.Text = if ($env:CONFLUENCE_API_TOKEN) { $env:CONFLUENCE_API_TOKEN } else { "" }
+# $txtToken.PasswordChar = [char]0x2022  # bullet character mask
+# $txtToken.Text = if ($env:CONFLUENCE_API_TOKEN) { $env:CONFLUENCE_API_TOKEN } else { "" }
 
 $credGroup.Controls.AddRange(@($lblBase, $txtBaseUrl, $lblEmail, $txtEmail, $lblToken, $txtToken))
 $form.Controls.Add($credGroup)
