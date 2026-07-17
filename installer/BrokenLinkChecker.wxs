@@ -56,16 +56,17 @@
          COMPONENTS
          ═══════════════════════════════════════════════ -->
 
-    <!-- Application files -->
+    <!-- Application files (one component per file — required for Guid="*") -->
     <DirectoryRef Id="INSTALLDIR">
-      <Component Id="CompAppFiles" Guid="*">
-        <!-- KeyPath on the main script file -->
+      <Component Id="CompPS1" Guid="*">
         <File Id="FilePS1"
               Source="..\BrokenLinkChecker.ps1"
               KeyPath="yes" />
-        <!-- Launcher batch file (kept in same dir so %~dp0 resolves correctly) -->
+      </Component>
+      <Component Id="CompBAT" Guid="*">
         <File Id="FileBAT"
-              Source="..\BrokenLinkChecker.bat" />
+              Source="..\BrokenLinkChecker.bat"
+              KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
@@ -117,7 +118,8 @@
              Description="Installs the Confluence Broken Link Checker."
              Level="1"
              ConfigurableDirectory="INSTALLDIR">
-      <ComponentRef Id="CompAppFiles" />
+      <ComponentRef Id="CompPS1" />
+      <ComponentRef Id="CompBAT" />
       <ComponentRef Id="CompStartMenu" />
       <ComponentRef Id="CompDesktopShortcut" />
     </Feature>

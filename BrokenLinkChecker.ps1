@@ -100,6 +100,8 @@ $txtToken.Size = New-Object System.Drawing.Size(735, 22)
 $txtToken.Font = New-Object System.Drawing.Font($fontFamily, 9)
 $txtToken.UseSystemPasswordChar = $true
 $txtToken.ReadOnly = $false
+$txtToken.Enabled = $true
+$txtToken.BackColor = [System.Drawing.Color]::White
 $txtToken.Text = if ($env:CONFLUENCE_API_TOKEN) { $env:CONFLUENCE_API_TOKEN } else { "" }
 
 $credGroup.Controls.AddRange(@($lblBase, $txtBaseUrl, $lblEmail, $txtEmail, $lblToken, $txtToken))
@@ -124,6 +126,9 @@ $txtPageUrl = New-Object System.Windows.Forms.TextBox
 $txtPageUrl.Location = New-Object System.Drawing.Point(120, 25)
 $txtPageUrl.Size = New-Object System.Drawing.Size(735, 22)
 $txtPageUrl.Font = New-Object System.Drawing.Font($fontFamily, 9)
+$txtPageUrl.ReadOnly = $false
+$txtPageUrl.Enabled = $true
+$txtPageUrl.BackColor = [System.Drawing.Color]::White
 
 $pageGroup.Controls.AddRange(@($lblPage, $txtPageUrl))
 $form.Controls.Add($pageGroup)
