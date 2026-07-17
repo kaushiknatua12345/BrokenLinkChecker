@@ -1,0 +1,23 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260717170123
+Username: ONBASE\knatua
+RunAs User: ONBASE\knatua
+Configuration Name: 
+Machine: HYL-066238 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Program Files\Microsoft VS Code\125df4672b\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 30968
+PSVersion: 5.1.26100.8655
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.8655
+BuildVersion: 10.0.26100.8655
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\knatua\Pictures\Hackathon 2026\BrokenLinkChecker\BrokenLinkChecker.log
+[07/17/2026 17:01:23] Script starting...
+[07/17/2026 17:01:23] Launching GUI...
+[07/17/2026 17:01:23] Base URL: https://hyland.atlassian.net/wiki
+[07/17/2026 17:01:23] Token loaded: True

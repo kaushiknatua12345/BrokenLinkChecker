@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  WiX v3 installer source for Confluence Broken Link Checker
+  Build with:  build-installer.bat
+  Requires:    WiX Toolset v3.x  (https://wixtoolset.org/releases/)
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Product Id="*"
+           Name="Confluence Broken Link Checker"
+           Language="1033"
+           Version="2.0.0.0"
+           Manufacturer="Hyland"
+           UpgradeCode="5E2A3B7C-D8F9-4E01-A234-5B6C7D8E9F01">
+
+    <Package InstallerVersion="301"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Description="Scans Confluence pages for broken links"
+             Comments="Requires Windows PowerShell 5.1 or later" />
+
+    <!-- Replace older versions silently on upgrade -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Confluence Broken Link Checker is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Use the PowerShell exe as the application icon -->
+    <Icon Id="AppIcon.ico"
+          SourceFile="$(env.SystemRoot)\System32\WindowsPowerShell\v1.0\powershell.exe" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+    <Property Id="ARPURLINFOABOUT"  Value="https://hyland.atlassian.net" />
+    <Property Id="ARPCONTACT"       Value="Hyland R&amp;D Education Services" />
+
+    <!-- ═══════════════════════════════════════════════
+         DIRECTORY STRUCTURE
+         ═══════════════════════════════════════════════ -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <!-- %ProgramFiles%\Hyland\BrokenLinkChecker -->
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="HylandDir" Name="Hyland">
+          <Directory Id="INSTALLDIR" Name="BrokenLinkChecker" />
+        </Directory>
+      </Directory>
+
+      <!-- Start Menu > Programs > Hyland -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="HylandMenuDir" Name="Hyland" />
+      </Directory>
+
+      <!-- Desktop -->
+      <Directory Id="DesktopFolder" />
+
+    </Directory>
+
+    <!-- ═══════════════════════════════════════════════
+         COMPONENTS
+         ═══════════════════════════════════════════════ -->
+
+    <!-- Application files -->
+    <DirectoryRef Id="INSTALLDIR">
+      <Component Id="CompAppFiles" Guid="*">
+        <!-- KeyPath on the main script file -->
+        <File Id="FilePS1"
+              Source="..\BrokenLinkChecker.ps1"
+              KeyPath="yes" />
+        <!-- Launcher batch file (kept in same dir so %~dp0 resolves correctly) -->
+        <File Id="FileBAT"
+              Source="..\BrokenLinkChecker.bat" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Start Menu shortcuts -->
+    <DirectoryRef Id="HylandMenuDir">
+      <Component Id="CompStartMenu" Guid="*">
+        <Shortcut Id="StartMenuApp"
+                  Name="Confluence Broken Link Checker"
+                  Description="Scan a Confluence page for broken links"
+                  Target="[INSTALLDIR]BrokenLinkChecker.bat"
+                  WorkingDirectory="INSTALLDIR"
+                  Icon="AppIcon.ico"
+                  IconIndex="0" />
+        <Shortcut Id="StartMenuUninstall"
+                  Name="Uninstall Broken Link Checker"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]" />
+        <!-- Required for clean folder removal on uninstall -->
+        <RemoveFolder Id="RemoveHylandMenuDir" On="uninstall" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\Hyland\BrokenLinkChecker"
+                       Name="StartMenu"
+                       Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Desktop shortcut -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="CompDesktopShortcut" Guid="*">
+        <Shortcut Id="DesktopApp"
+                  Name="Confluence Broken Link Checker"
+                  Description="Scan a Confluence page for broken links"
+                  Target="[INSTALLDIR]BrokenLinkChecker.bat"
+                  WorkingDirectory="INSTALLDIR"
+                  Icon="AppIcon.ico"
+                  IconIndex="0" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\Hyland\BrokenLinkChecker"
+                       Name="Desktop"
+                       Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- ═══════════════════════════════════════════════
+         FEATURES
+         ═══════════════════════════════════════════════ -->
+    <Feature Id="MainFeature"
+             Title="Confluence Broken Link Checker"
+             Description="Installs the Confluence Broken Link Checker."
+             Level="1"
+             ConfigurableDirectory="INSTALLDIR">
+      <ComponentRef Id="CompAppFiles" />
+      <ComponentRef Id="CompStartMenu" />
+      <ComponentRef Id="CompDesktopShortcut" />
+    </Feature>
+
+    <!-- ═══════════════════════════════════════════════
+         INSTALLER UI  (WixUI_InstallDir)
+         Shows: Welcome → License → Install Dir → Install → Finish
+         ═══════════════════════════════════════════════ -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <!-- "Launch application" checkbox on the Finish dialog -->
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT"
+              Value="Launch Confluence Broken Link Checker" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+    <CustomAction Id="LaunchApp"
+                  FileKey="FileBAT"
+                  ExeCommand=""
+                  Execute="immediate"
+                  Impersonate="yes"
+                  Return="asyncNoWait" />
+    <InstallExecuteSequence>
+      <Custom Action="LaunchApp" After="InstallFinalize">
+        WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed
+      </Custom>
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>
