@@ -1,12 +1,12 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20260717180333
+Start time: 20260717182537
 Username: ONBASE\knatua
 RunAs User: ONBASE\knatua
 Configuration Name: 
 Machine: HYL-066238 (Microsoft Windows NT 10.0.26100.0)
-Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File c:\Users\knatua\Pictures\Broken\BrokenLinkChecker\BrokenLinkChecker.ps1
-Process ID: 26352
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File c:\Users\knatua\Pictures\Broken\BrokenLinkChecker\BrokenLinkChecker.ps1
+Process ID: 13772
 PSVersion: 5.1.26100.8655
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.8655
@@ -17,12 +17,12 @@ PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is C:\Users\knatua\Pictures\Broken\BrokenLinkChecker\BrokenLinkChecker.log
-[07/17/2026 18:03:33] Script starting...
-[07/17/2026 18:03:34] Launching GUI...
-[07/17/2026 18:03:34] Base URL: https://hyland.atlassian.net/wiki
-[07/17/2026 18:03:34] Token loaded: False
-[07/17/2026 18:03:42] Script ending.
+[07/17/2026 18:25:37] Script starting...
+[07/17/2026 18:25:37] Launching GUI...
+[07/17/2026 18:25:37] Base URL: https://hyland.atlassian.net/wiki
+[07/17/2026 18:25:37] Token loaded: False
+[07/17/2026 18:25:41] Script ending.
 **********************
 Windows PowerShell transcript end
-End time: 20260717180342
+End time: 20260717182541
 **********************
