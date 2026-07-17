@@ -98,11 +98,10 @@ $txtToken = New-Object System.Windows.Forms.TextBox
 $txtToken.Location = New-Object System.Drawing.Point(120, 89)
 $txtToken.Size = New-Object System.Drawing.Size(735, 22)
 $txtToken.Font = New-Object System.Drawing.Font($fontFamily, 9)
-$txtToken.UseSystemPasswordChar = $true
 $txtToken.ReadOnly = $false
 $txtToken.Enabled = $true
 $txtToken.BackColor = [System.Drawing.Color]::White
-$txtToken.Text = if ($env:CONFLUENCE_API_TOKEN) { $env:CONFLUENCE_API_TOKEN } else { "" }
+$txtToken.Text = ""
 
 $credGroup.Controls.AddRange(@($lblBase, $txtBaseUrl, $lblEmail, $txtEmail, $lblToken, $txtToken))
 $form.Controls.Add($credGroup)
