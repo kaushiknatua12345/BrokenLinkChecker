@@ -134,7 +134,7 @@ $form.Controls.Add($pageGroup)
 
 # --- Buttons ---
 $btnScan = New-Object System.Windows.Forms.Button
-$btnScan.Text = "Scan for Broken Links"
+$btnScan.Text = "Link and Page Checker"
 $btnScan.Location = New-Object System.Drawing.Point(15, 292)
 $btnScan.Size = New-Object System.Drawing.Size(175, 38)
 $btnScan.BackColor = $primaryColor
